@@ -1,4 +1,3 @@
-import axios from 'axios'
 // STEP 2: Create tabs
 // -----------------------
 // Using axios send a GET request to the address: https://lambda-times-api.herokuapp.com/topics
@@ -10,19 +9,42 @@ import axios from 'axios'
 //    <div class="tab">topic here</div>
 //
 // NOTE: you do _not_ need to install axios as it's included in the HTML via script element
+
 const entryPoint = document.querySelector('.topics')
 
-function tabsMaker() {
+function tabMaker(object) {
 
-    const tab = document.createElement('div')
+    const tabs = document.createElement('div')
+    const tab1 = document.createElement('button')
+    const tab2 = document.createElement('button')
+    const tab3 = document.createElement('button')
+    const tab4 = document.createElement('button')
+    const tab5 = document.createElement('button')
 
-    tab.classList.add('tab')
+    tabs.appendChild(tab1)
+    tabs.appendChild(tab2)
+    tabs.appendChild(tab3)
+    tabs.appendChild(tab4)
+    tabs.appendChild(tab5)
 
-    return tab
+    tab1.classList.add('tab-1')
+    tab2.classList.add('tab-2')
+    tab3.classList.add('tab-3')
+    tab4.classList.add('tab-4')
+    tab5.classList.add('tab-5')
+
+    tab1.textContent = object.topics[0]
+    tab2.textContent = object.topics[1]
+    tab3.textContent = object.topics[2]
+    tab4.textContent = object.topics[3]
+    tab5.textContent = object.topics[4]
+
+    return tabs
 }
 
-axios.get('https://lambda-times-api.herokuapp.com/topics')
-        .then(result => {
-            const topicTab = tabsMaker(result.data)
-            entryPoint.append(topicTab)
-});
+    axios.get(`https://lambda-times-api.herokuapp.com/topics`)
+        .then(res => {
+
+        const tabContent = tabMaker(res.data)
+        entryPoint.append(tabContent)
+        })
