@@ -1,3 +1,4 @@
+import axios from 'axios'
 // STEP 3: Create article cards.
 // -----------------------
 // Send an HTTP GET request to the following address: https://lambda-times-api.herokuapp.com/articles
@@ -20,3 +21,73 @@
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
+
+const entryPoint = document.querySelector('.cards-container')
+
+function articleCards(object) {
+
+    const card = document.createElement('div')
+    const headline = document.createElement('div')
+    const author = document.createElement('div')
+    const imgContainer = document.createElement('div')
+    const img = document.createElement('img')
+    const authorsName= document.createElement('span')
+
+    card.appendChild(headline)
+    card.appendChild(author)
+    author.appendChild(imgContainer)
+    imgContainer.appendChild(img)
+    author.appendChild(authorsName)
+
+    card.classList.add('card')
+    headline.classList.add('headline')
+    author.classList.add('author')
+    imgContainer.classList.add('img-container')
+    img.classList.add('img')
+    authorsName.classList.add('span')
+
+    img.src = object.authorPhoto
+    headline.textContent = object.headline
+    authorsName.textContent = object.authorName
+
+    card.addEventListener('click', () => {
+        console.log(object.headline)
+    })
+    return card
+}
+
+axios.get('https://lambda-times-api.herokuapp.com/articles')
+    .then(res => {
+        console.log(res.data.articles)
+        let bootstrap = res.data.articles.bootstrap
+        let javascript = res.data.articles.javascript
+        let technology = res.data.articles.technology
+        let jquery = res.data.articles.jquery
+        let node = res.data.articles.node
+
+
+        bootstrap.forEach(e => {
+            const card = articleCards(e)
+            entryPoint.appendChild(card)
+        });
+
+        javascript.forEach(e => {
+            const card = articleCards(e)
+            entryPoint.appendChild(card)
+        });
+
+        technology.forEach(e => {
+            const card = articleCards(e)
+            entryPoint.appendChild(card)
+        });
+
+        jquery.forEach(e => {
+            const card = articleCards(e)
+            entryPoint.appendChild(card)
+        });
+
+        node.forEach(e => {
+            const card = articleCards(e)
+            entryPoint.appendChild(card)
+        });
+    })

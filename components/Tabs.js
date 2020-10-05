@@ -27,11 +27,11 @@ function tabMaker(object) {
     tabs.appendChild(tab4)
     tabs.appendChild(tab5)
 
-    tab1.classList.add('tab-1')
-    tab2.classList.add('tab-2')
-    tab3.classList.add('tab-3')
-    tab4.classList.add('tab-4')
-    tab5.classList.add('tab-5')
+    tab1.classList.add('active-tab')
+    tab2.classList.add('active-tab')
+    tab3.classList.add('active-tab')
+    tab4.classList.add('active-tab')
+    tab5.classList.add('active-tab')
 
     tab1.textContent = object.topics[0]
     tab2.textContent = object.topics[1]
